@@ -1,0 +1,84 @@
+$total-columns  : 12;             // a 12-column grid
+$column-width   : 15%;            // each column is 4em wide
+$gutter-width   : 4%;            // 1em gutters between columns
+$grid-padding   : 1%;  						// grid-padding equal to gutters
+
+
+
+$base-font-size: 16px;
+
+
+// old colors
+$white:					#FFFFFF;
+$greyLgt:				#999999;
+$grey:					#414042;
+$greyDrk:				#231F20;
+$red:						#ED1C24;
+$redDrk:				#C11A26;
+$greyBg:				#F5F5F5;
+$greyBorder:		#b8b8b8;
+
+// colors
+$clr1:					#000;
+$clr2:					#666;
+
+
+$font1: 'Helvetica Neue', Arial, sans-serif;
+
+$light: 300;
+$normal: 400;
+$bold: 700;
+
+//$icons:	sprite-map("../img/icon/*.png");
+
+@import "compass/css3";
+@import "susy";
+
+@import url(http://fonts.googleapis.com/css?family=Oswald:400,300,700);
+@import "compass/reset";
+
+/*
+@import "../img/icon/*.png";
+@include all-icon-sprites;
+*/
+
+@function rem($px, $base: $base-font-size) {
+	@return ($px / $base) * 1rem;
+}
+
+$tablet:		rem(520px);
+$laptop:		rem(800px);
+$desktop:		rem(1200px);
+
+@mixin breakpoint($point) {
+  @if $point == desktop {
+    @media (min-width: $desktop) { @content; }
+  }
+  @else if $point == laptop {
+    @media (min-width: $laptop) { @content; }
+  }
+  @else if $point == tablet {
+    @media (min-width: $tablet)  { @content; }
+  }
+}
+
+/*
+@mixin get-sprite($map, $sprite, $repeat: no-repeat, $height: true, $width: true) {
+  $sprite-image: sprite-file($map, $sprite);
+  $sprite-map: sprite-url($map);
+  $sprite-position: sprite-position($map, $sprite);
+  
+  background: $sprite-map $sprite-position $repeat;
+
+  @if $height == true {
+    $sprite-height: image-height($sprite-image);
+    height: $sprite-height; }
+  @if $width == true {
+    $sprite-width: image-width($sprite-image);
+    width: $sprite-width; }
+}
+
+@mixin button-gradient($start, $end) {
+		background-image: (linear-gradient(color-stops($start, scale-lightness($start, -5%) 50%, scale-lightness($end, 5%) 51%, $end)));
+}
+*/

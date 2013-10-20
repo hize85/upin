@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Submit a New Posting</title>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" type="text/css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Submit a New Posting</h1>
+
+        <form id="form" role="form">
+            <div class="form-group">
+                <label for="title">Category</label>
+                <select class="form-control" id="category" name="category">
+                    <option value="">Choose a category for your post</option>
+                    <optgroup label=""></optgroup>
+                    <option value="For Sale">For Sale</option>
+                    <option value="Freecycle">Freecycle</option>
+                    <option value="Wanted">Wanted</option>
+                    <optgroup label=""></optgroup>
+                    <option value="Books">Books</option>
+                    <option value="Tutoring">Tutoring</option>
+                    <optgroup label=""></optgroup>
+                    <option value="Roomates">Roomates</option>
+                    <option value="Housing">Housing</option>
+                    <optgroup label=""></optgroup>
+                    <option value="Activities">Activities</option>
+                    <option value="Rideshare">Rideshare</option>
+                    <optgroup label=""></optgroup>
+                    <option value="Jobs/Internships">Jobs/Internships</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="title">Title</label> <input type="text" class="form-control" id="title" name="title" placeholder="Enter a title for your post" maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" placeholder="Enter a description, price, etc." rows="5"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="exampleInputFile">Image</label> <input type="file" id="image">
+
+                <p class="help-block">Add an image to your post!</p>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label> <input type="email" class="form-control" id="email" name="email" placeholder="Enter your email address" maxlength="100">
+            </div>
+
+            <div class="form-group">
+                <input class="btn btn-success" id="submit" type="submit" name="submit" value="Submit Post">
+            </div>
+        </form>
+    </div><!-- /container -->
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript">
+        // Helper function to serialize all the form fields into a JSON string
+        function formToJSON() {
+        	return JSON.stringify({
+        		"user_id": $('#user_id').val(),
+        		"category": $('#category').val(),
+        		"title": $('#title').val(),
+        		"description": $('#description').val(),
+        		"image": $('#image').val(),
+        		"email": $('#email').val()
+            });
+        }
+
+        /* Attach a submit handler to the form */
+        $("#form").submit(function(event) {
+
+            /* Stop form from submitting normally */
+            event.preventDefault();
+
+            /* Send the data using post and put the results in a div */
+            $.ajax({
+                type: "post",
+                contentType: "application/json",
+                url: "http://u-pin.co/api/posts",
+                dataType: "json",
+                data: formToJSON(),
+                success: function(data, textStatus, jqXHR){
+                    alert("Post created successfully");
+                },
+                error: function(jqXHR, textStatus, errorThrown){
+                    alert("Error, check console");
+                    console.log(jqXHR.responseText);
+                }
+            });
+        });
+    </script>
+</body>
+</html>
